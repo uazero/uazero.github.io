@@ -2929,6 +2929,10 @@ If you want to make CSS edits, use the "Custom CSS" section in the Customizer in
 
 */
 
+      .main {
+        max-width: 850px;
+      }
+    
       .post-detail .post .post-content p {
         font-size: 14px;
       }
