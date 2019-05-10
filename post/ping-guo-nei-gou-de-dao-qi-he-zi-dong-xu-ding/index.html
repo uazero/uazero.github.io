@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="all,follow">
 <meta name="googlebot" content="index,follow,snippet,archive">
-<title>邓白氏编码查询 | APPLEPIA</title>
+<title>苹果内购的到期和自动续订 | APPLEPIA</title>
 <link rel="shortcut icon" href="https://applepia.github.io/favicon.ico?v=1557482011314">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <link rel="stylesheet" href="https://applepia.github.io/styles/main.css" type='text/css' media='all'>
@@ -126,20 +126,12 @@
     <div id="loop-container" class="loop-container">
       <div class="post type-post status-publish format-standard has-post-thumbnail hentry category-design tag-design tag-standard-2 tag-tagalicious tag-travel entry full-without-featured odd excerpt-1">
         
-          <div class='featured-image lazy lazy-bg-image' data-background="https://applepia.github.io/post-images/deng-bai-shi-bian-ma-cha-xun.jpg">
-          </div>
-        
 
         <div class="entry-meta">
-          <span class="date">· 2019-04-29 ·</span> <span> / </span>
+          <span class="date">· 2019-04-28 ·</span> <span> / </span>
           <span class="author">
             <a href="https://applepia.github.io" title="" rel="author"> Powered by <a href="https://applepia.github.io" target="_blank">APPLEPIA</a></a>
           </span>
-          
-            <span class="category">
-                    <span> / </span>
-                    <a href="https://applepia.github.io/tag/Ffgl_mMZG">DUNS</a>
-                </span>
           
             <span class="category">
                     <span> / </span>
@@ -148,26 +140,73 @@
           
         </div>
         <div class='entry-header'>
-          <h1 class='entry-title'>邓白氏编码查询</h1>
+          <h1 class='entry-title'>苹果内购的到期和自动续订</h1>
         </div>
         <div class="entry-container">
           <div class="entry-content">
             <article>
-              <p>编码忘了？不要慌，在这儿查。</p>
+              <p>订阅的续订过程从到期日的前10天开始。在这10天里，App Store 会检查任何可能引起延期或阻止自动续订的结算问题，例如：</p>
+<p>用户的付款方式不再有效；
+商品在用户购买后涨价；
+商品不再可用；</p>
+<p>App Store 会将问题通知用户，以便他们在订阅到期之前解决，避免订阅服务中断。</p>
+<p>在订阅到期前的24小时内，App Store 开始尝试自动续订。App Store 会在一段时间内多次尝试续订，但是如果失败次数过多，将会最终停止。</p>
+<blockquote>
+<p>注意: 对于结算相关的问题，App Store 最多尝试续订60天。您可以在回执中检查订阅重试标记，以确定 App Store 是否仍在尝试续订。</p>
+</blockquote>
 <!-- more -->
-<p><a href="https://www.dandb.com/advanced-search/">https://www.dandb.com</a></p>
-<ul>
-<li>通过公司名和国家查询</li>
-<li>通过联系电话查询</li>
-<li>通过编码查询</li>
-</ul>
-<!-- more -->
-<p><img src="https://applepia.github.io/post-images/1556526231893.png" alt=""></p>
-<!-- more -->
-<p>申请 Tips:</p>
-<p>applecs@dnb.com、appdeveloper@dnb.com 这两个邮箱自2019年1月已无效，如果编号申请失败，可以通过线上表格 <a href="https://support.dnb.com/?CUST=APPLEDEV">https://support.dnb.com/?CUST=APPLEDEV</a> 联系邓白氏客服。</p>
-<p><img src="https://applepia.github.io/post-images/1556526385730.png" alt=""></p>
-<p>虽然不是所有选项必填，但是建议主动上传营业执照，并在描述里说明 APP 计划近期上线，（看审核人员心情）还是有可能加快审核进度的。提交后的第四天便顺利收到了邓白氏编码，期间没有华夏邓白氏的确认邮件。</p>
+<p>https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Subscriptions.html#//apple_ref/doc/uid/TP40008267-CH7-SW3</p>
+<p>App Store 在订阅快要到期前开始续订，以防止订阅中断的情况发生。然而中断是避免不了的。举个例子，若用户的付款信息不再有效，则第一次续订尝试以失败告终。如果用户在截止日期后更新了付款信息，那么在截止日期至随后自动续订尝试成功的日期之间，订阅会有短暂的中断。用户也可以取消自动续订，主动让订阅过期，之后在续订，让订阅中断更久。确保你的订阅逻辑可以正确处理各种长短的中断时间。你可以检查自动续订状态字段以确定订阅的续订状态。</p>
+<p>续订成功后，StoreKit 会在交易队列中添加一条续订的交易。App 在启动时检查交易队列，并以处理其他交易的方式处理续订。注意，如果 App 在订阅续订时已在运行，则不会调用交易观察; App 会在下次启动时查到续订。</p>
+<p>举个例子，下面的时间线显示了一个按月续订用户的账户。在这个示例中，由于结算问题，订阅暂时中断。用户把问题解决后，订阅以新的周期开始续订。</p>
+<p>| 日期	事件	订阅状态
+2月20日	用户开始按月续订。服务立即可用。	激活
+3月20日	自动续订一个月。服务继续可用。	激活
+4月19日	用户的付款方式到期。	激活
+4月20日	交易失败，导致续订失败。订阅中断。	中断
+5月5日	用户更新付款方式。App Store 能够成功续订订阅。服务立即可用。	激活
+6月5日	自动续订一个月。服务继续可用。	激活</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">日期</th>
+<th style="text-align:right">事件</th>
+<th style="text-align:center">订阅状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2月20日</td>
+<td style="text-align:right">用户开始按月续订。服务立即可用。</td>
+<td style="text-align:center">激活</td>
+</tr>
+<tr>
+<td style="text-align:left">3月20日</td>
+<td style="text-align:right">自动续订一个月。服务继续可用。</td>
+<td style="text-align:center">激活</td>
+</tr>
+<tr>
+<td style="text-align:left">4月19日</td>
+<td style="text-align:right">用户的付款方式到期。</td>
+<td style="text-align:center">激活</td>
+</tr>
+<tr>
+<td style="text-align:left">4月20日</td>
+<td style="text-align:right">交易失败，导致续订失败。订阅中断。</td>
+<td style="text-align:center">中断</td>
+</tr>
+<tr>
+<td style="text-align:left">5月5日</td>
+<td style="text-align:right">用户更新付款方式。App Store 能够成功续订订阅。服务立即可用。</td>
+<td style="text-align:center">激活</td>
+</tr>
+<tr>
+<td style="text-align:left">6月5日</td>
+<td style="text-align:right">自动续订一个月。服务继续可用。</td>
+<td style="text-align:center">激活</td>
+</tr>
+</tbody>
+</table>
 
             </article>
           </div>
@@ -228,7 +267,7 @@
             <nav class="navigation pagination" role="navigation">
               <h2 class="screen-reader-text">Posts navigation</h2>
               <div class="nav-links">
-                <a class="next page-numbers" href="https://applepia.github.io/post/ping-guo-nei-gou-de-dao-qi-he-zi-dong-xu-ding">下一篇->苹果内购的到期和自动续订</a>
+                <a class="next page-numbers" href="https://applepia.github.io/post/app-store-pre-orderyu-ding">下一篇->App Store Pre-Order （预订）</a>
               </div>
             </nav>
           
